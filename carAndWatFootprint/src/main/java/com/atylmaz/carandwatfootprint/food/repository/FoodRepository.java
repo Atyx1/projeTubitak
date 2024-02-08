@@ -1,5 +1,6 @@
-package com.atylmaz.carandwatfootprint.food;
+package com.atylmaz.carandwatfootprint.food.repository;
 
+import com.atylmaz.carandwatfootprint.food.entity.Food;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

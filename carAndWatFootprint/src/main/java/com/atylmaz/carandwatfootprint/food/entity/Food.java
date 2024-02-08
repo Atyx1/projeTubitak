@@ -1,6 +1,6 @@
-package com.atylmaz.carandwatfootprint.food;
+package com.atylmaz.carandwatfootprint.food.entity;
 
-import com.atylmaz.carandwatfootprint.meal.Meal;
+import com.atylmaz.carandwatfootprint.meal.entity.Meal;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,7 +11,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "food")
 public class Food {
 
@@ -19,12 +18,16 @@ public class Food {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+
     private String foodName;
-    private float carbonFootprintKg;
-    private float waterFootprintKg;
+
     private float carbonFootprintCc;
     private float waterFootprintCc;
 
-
+    public Food(String foodName, float carbonFootprintCc, float waterFootprintCc) {
+        this.foodName = foodName;
+        this.carbonFootprintCc = carbonFootprintCc;
+        this.waterFootprintCc = waterFootprintCc;
+    }
 }
 

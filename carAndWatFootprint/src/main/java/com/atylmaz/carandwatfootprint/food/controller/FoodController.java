@@ -1,5 +1,7 @@
-package com.atylmaz.carandwatfootprint.food;
+package com.atylmaz.carandwatfootprint.food.controller;
 
+import com.atylmaz.carandwatfootprint.food.entity.Food;
+import com.atylmaz.carandwatfootprint.food.service.FoodService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping()
+@RequestMapping("/food")
 public class FoodController {
 
 
@@ -50,7 +52,7 @@ public class FoodController {
         }
     }
 
-    @GetMapping("food/show")
+    @GetMapping("/show")
     public ResponseEntity<List<Food>> findAllFoods() {
          List<Food> foods = foodService.findAll();
          return new ResponseEntity<>(foods, HttpStatus.OK);
