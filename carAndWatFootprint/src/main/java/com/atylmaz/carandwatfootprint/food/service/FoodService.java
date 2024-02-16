@@ -1,10 +1,14 @@
 package com.atylmaz.carandwatfootprint.food.service;
 
 
+import com.atylmaz.carandwatfootprint.food.dto.CreateFoodDto;
+import com.atylmaz.carandwatfootprint.food.dto.UpdateFoodDto;
 import com.atylmaz.carandwatfootprint.food.entity.Food;
 import com.atylmaz.carandwatfootprint.food.exception.FoodNotFoundException;
 import com.atylmaz.carandwatfootprint.food.repository.FoodRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,15 +18,19 @@ import java.util.List;
 public class FoodService {
 
     private final FoodRepository foodRepository;
+    private final ModelMapper modelMapper;
 
-    public Food addFood(Food food) {
-        return foodRepository.save(food);
+    @Transactional
+    public Food addFood( CreateFoodDto createFoodDto) {
+        return foodRepository.save(modelMapper.map(createFoodDto, Food.class));
+
     }
 
-    public Food deleteById(Integer id) {
+    @Transactional
+    public void deleteById(Integer id) {
         Food food = foodRepository.findById(id).orElseThrow(() -> new FoodNotFoundException("Food not found with id: " + id));
         foodRepository.delete(food);
-        return food;
+
     }
 
     public Food findByName(String name) {
@@ -34,8 +42,10 @@ public class FoodService {
         return foodRepository.findAll();
     }
 
-    public void update(String name, Food food) {
-        foodRepository.save(food);
+    public void update(String name, UpdateFoodDto createFoodDto) {
+        Food food1= foodRepository.findByFoodName(name);
+        foodRepository.save(modelMapper.map(createFoodDto, Food.class));
+
     }
 
 

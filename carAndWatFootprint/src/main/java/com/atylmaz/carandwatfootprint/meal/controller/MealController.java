@@ -1,32 +1,30 @@
 package com.atylmaz.carandwatfootprint.meal.controller;
 
 
+import com.atylmaz.carandwatfootprint.meal.dto.CreateMealDto;
 import com.atylmaz.carandwatfootprint.meal.entity.Meal;
 import com.atylmaz.carandwatfootprint.meal.service.MealService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/meal")
 @RequiredArgsConstructor
 public class MealController {
 
     private final MealService mealService;
 
+
     @PostMapping("/add")
-    public ResponseEntity<Meal> addMeal(@RequestBody  Meal meal){
+    public ResponseEntity<String> addMeal(@RequestBody CreateMealDto meal,@RequestParam List<String> foodNameList  ){
 
         try {
-            Meal savedFood = mealService.addMeal(meal);
-            return new ResponseEntity<>(savedFood, HttpStatus.CREATED);
+               mealService.addMeal(meal,foodNameList);
+            return new ResponseEntity<>(meal.getMealName(), HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

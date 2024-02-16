@@ -24,6 +24,8 @@ public class Food {
     private float carbonFootprintCc;
     private float waterFootprintCc;
 
+
+
     public Food(String foodName, float carbonFootprintCc, float waterFootprintCc) {
         this.foodName = foodName;
         this.carbonFootprintCc = carbonFootprintCc;

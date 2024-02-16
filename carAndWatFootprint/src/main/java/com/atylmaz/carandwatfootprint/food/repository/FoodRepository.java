@@ -8,7 +8,8 @@ import org.springframework.stereotype.Repository;
 public interface FoodRepository extends JpaRepository<Food, Integer> {
 
      Food findByFoodName(String foodName);
-
+     Float findCarbonFootprintCcByFoodName(String foodName);
+     Float findWaterFootprintCcByFoodName(String foodName);
 
 
 

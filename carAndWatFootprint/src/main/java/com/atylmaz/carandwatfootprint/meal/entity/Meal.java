@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -33,38 +34,22 @@ public class Meal {
 
 
 
-
-    public void setTotalCarbonFootprintCc(float totalCarbonFootprintCc) {
-
-          foodList.forEach(food -> {
-             this.totalCarbonFootprintCc += food.getWaterFootprintCc();
-        });
-
-
+public void addFood(Food food){
+    if(foodList == null){
+        foodList = new ArrayList<>();
     }
-
-
-    public void setTotalWaterFootprintCc(float totalWaterFootprintCc) {
-
-        foodList.forEach(food -> {
-            this.totalWaterFootprintCc += food.getWaterFootprintCc();
-        });
-    }
-
-    public void calculateTotalCarbonFootprint() {
-    foodList.forEach(food -> {
-        this.totalCarbonFootprintCc += food.getCarbonFootprintCc();
-    });
+    foodList.add(food);
 }
 
-public void calculateTotalWaterFootprint() {
-    foodList.forEach(food -> {
-        this.totalWaterFootprintCc += food.getWaterFootprintCc();
-    });
+public void removeFood(Food food) {
+    if (foodList != null) {
+        foodList.remove(food);
+    }
 }
 
 
-  public void setStatus(Status status) {
+
+  public void setStatus(float totalCarbonFootprintCc, float totalWaterFootprintCc) {
     if (totalCarbonFootprintCc > 0 && totalCarbonFootprintCc < 150) {
         this.status = Status.GOOD;
     } else if (totalCarbonFootprintCc >= 150 && totalCarbonFootprintCc < 300) {
